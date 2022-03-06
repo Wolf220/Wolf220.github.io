@@ -1,34 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300&display=swap');
-* {
-    font-family: 'Source Code Pro', monospace;
-    background:#262626;
-    padding:0px;
-    margin:0px;
-}
 .profilephoto {
     width:80%;
     object-fit:cover;
     border-radius:50%;
     margin:5%;
-}
-h1 {
-    padding:1%;
-    width:98%;
-    text-align:center;
-    font-size:50px;
-}
-h2 {
-    width:98%;
-    padding:1%;
-    font-size:25;
-    text-align:center;
-}
-p {
-    width:94%;
-    padding:3%;
-}
-a {
-    color:#11CCEE;
 }
 .aboutme {
     width:11%;
@@ -37,14 +11,6 @@ a {
     text-align:center;
     color:#FFFFFF;
     font-size:16px;
-}
-.content {
-    width:89%;
-    height:85%;
-    float:right;
-    color:#FFFFFF;
-    font-size:14px;
-    text-align:justify;
 }
 .footer {
     position:fixed;

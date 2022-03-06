@@ -1,1 +1,98 @@
-this is only a test, ignore
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link rel="stylesheet" href="../global.css">
+    <link rel="stylesheet" href="../aboutMe.css">
+</head>
+
+<body>
+    <div class="aboutme">
+        <a href="wolf220.github.io/aboutMe.html"><img
+            class="profilephoto"
+            src="https://avatars.githubusercontent.com/u/60710307?s=400&v=4"
+            alt="Wolf220's github pfp"
+        /></a>
+        <p>
+            He/Him</br>
+            OS:</br>
+            -Arch Linux</br>
+            -i3 gaps</br>
+            -Alacritty</br>
+            -Vim</br>
+        </p>
+    </div>
+    <div class="content">
+        <h1>How I Made <a href="https://github.com/Wolf220/Plutus">Plutus</a></h1>
+        <p>
+            Plutus is going to have been the first of several mini coding projects, all of which I will post the source
+            for. I know no one enjoys reading someone's life story, so let's get into my cryptocurrency.<br /><br />
+            First things first, I did not know much about bloclchain or javascript before starting this project, and
+            know slightly more after it. I used <a
+                href="https://dev.to/freakcdev297/creating-a-blockchain-in-60-lines-of-javascript-5fka">this
+                tutorial</a> for learning how it all works, and made changes to what I had.<br />
+            I'm not going to reinvent the wheel here, and I'm going to just say that the linked article is a preliminary
+            to this, although I will put some of the important parts in here. This block of code here is how I created
+            the text based menu for the app.<br />
+        </p>
+        <div class="code">
+            async function recurloop () {<br/>
+                const { firstPrompt } = await inquirer.prompt({<br/>
+                    name: 'firstPrompt',<br/>
+                    type: 'list',<br/>
+                    choices: ['help', 'mine', 'readBalance', 'listPeers', 'listPublic', 'listPrivate', 'sendPlutus', 'listBlockchain', 'debug'],<br/>
+                    message: 'What would you like to do?'<br/>
+                });<br/>
+        </div>
+        <p>
+            This code block creates a selectable list of things you can do using <a href="https://www.npmjs.com/package/inquirer">inquirer.</a> the list of choices is rather long, but the prompt looks nice and works well. The function is async, so I can make one question lead to another, which I did later on. The const command creates the variable in which the choice will be written. Now how do I make transactions? Remember how I said you can nest questions? I decided to use that.
+        </p>
+        <div class="code">
+            const {amount} = await inquirer.prompt({ <br/>
+				type: 'number', <br/>
+                name: 'amount', <br/>
+                message: 'How much would you like to send?' <br/>
+            }); <br/>
+            const {address} = await inquirer.prompt({ <br/>
+				type: 'input', <br/>
+                name: 'address', <br/>
+                message: 'Who would you like to send the Plutus to? (Must be a public address)' <br/>
+            }); <br/>
+            const {gas} = await inquirer.prompt({ <br/>
+				type: 'number', <br>
+                name: 'gas', <br>
+                message: 'how much would you like to pay for gas? (gas is like a tip for the miners)'<br>
+            }); <br>
+            const {confirm} = await inquirer.prompt({ <br>
+                type: 'confirm', <br>
+                name: 'confirm', <br>
+                message: 'Confirm transaction?', <br>
+                default: false <br>
+            });<br>
+            if(confirm){<br>
+                transaction = new Transaction(publicKey, address, amount, gas);<br>
+                transaction.sign(keyPair);<br>
+                sendMessage(produceMessage("TYPE_CREATE_TRANSACTION", transaction));<br>
+                Plutus.addTransaction(transaction);<br>
+            } <br>
+        </div>
+        <p>
+            This is not quite nested, but it does use the output of one prompt to feed another, via a switch (not shown). The way this is set up makes it easy to create transactions, but still makes it so you won't accidentally send Plutus to an unused address. The commands used in this block that refer to transactions, Plutus, sendMessage, etc. were explained in the article I referenced. You did read that, right?<br>
+            Now for two of the most important parts: keys and connections. I decided it was easiest to reference a JSON file for the data, rather than using command line variables. I did this using this block:
+        </p>
+        <div class="code">
+            const config = require("./data.json");<br>
+            const PORT = config.port;<br>
+            const PEERS = config.peers;<br>
+            const MY_ADDRESS = config.address;<br>
+            const publicKey = config.publicKey;<br>
+            const privateKey = config.privateKey;<br>
+            const keyPair = ec.keyFromPrivate(privateKey, "hex");<br>
+        </div>
+        <p>
+            Thankfully, nodejs allows you to import data directly from JSON files. Now how can you use this useless bit of code? Well, clone the repo, open a port, run the genkeys program, and add your data to the json file. Wait to get in on the action untill I can set up a semipermanent peer, so you won't have to ask people for a point of entry. I'll update the repo with the peer once it's online, so keep an eye on that if you're interested. If you want some more Plutus than just mining, make some improvements to my code! For each pull request with a good improvement, and I'll send 100 plutus your way. For now, keep an eye on the repo, and I'll see you in the mines.
+        </p>
+    </div>
+</body>
+
+</html>
