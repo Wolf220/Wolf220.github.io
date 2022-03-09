@@ -41,3 +41,9 @@ a {
     color:#FFFFFF;
     font-size:14px;
 }
+.aboutmebar {
+    position: absolute;
+    float: left;
+    height:100%;
+    width: 11%;
+}

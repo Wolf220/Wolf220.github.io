@@ -5,8 +5,6 @@
     margin:5%;
 }
 .aboutme {
-    width:11%;
-    height:100%;
     float:left;
     text-align:center;
     color:#FFFFFF;
@@ -30,7 +28,7 @@
     font-size:12px;
 }
 .fixed {
-    float:center;
+    float:left;
     position:fixed;
     bottom:0;
     left:0;
